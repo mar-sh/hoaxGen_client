@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
+    <link rel="stylesheet" href="css/imagehover.min.css">
 </head>
 
 <body style='height:100%'>
@@ -101,15 +102,14 @@
         </div>
         <div v-show='islogin'>
             <button type="button" class="btn btn-danger" v-on:click.prevent="logout">Logout</button>
-            <div class='row'>
-                <div v-for='hoax in hoaxes'>
-                    <div>
-                        <img :src=hoax.url>
+            <div class="container">
+                <div class='row'>
+                    <div class='col-sm-4' v-for='hoax in hoaxes'>
+                           <hoaxcard :hoax="hoax"></hoaxcard>
                     </div>
-
                 </div>
 
-            </div>
+            </div> 
         </div>
 
     </div>
@@ -117,6 +117,7 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./hoaxcard.js"></script>
     <script src="vue.js"></script>
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

@@ -8,7 +8,6 @@ const app = new Vue({
         landingpage:true,
         islogin:false,
         hoaxes:[]
-
     },
     methods:{
         tologinpage:function(){
