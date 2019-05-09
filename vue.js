@@ -57,7 +57,7 @@ const app = new Vue({
 
         },
         logout:function(){
-
+            localStorage.removeItem('token')
         }
         
     },
