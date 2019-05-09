@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" style='height:100%'>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body style='height:100%'>
+    <div id='app'>
+        <div id='landingpage' style='height: 100%;' v-show='landingpage'>
+            <div class='row justify-content-center pt-4'>
+                <img style="height: 180px"
+                    src='https://dewey.tailorbrands.com/production/brand_version_mockup_image/491/1972573491_31b262ed-3d5e-49c2-bd92-228049305f12.png?cb=1557396841'>
+            </div>
+            <div class='row justify-content-left pt-5' style='background:width 100%; height: auto;'>
+                <div id='fakeTweet' class='col-sm-7 mt-5 pl-5'>
+                    <img src="fakeTweet.png" style="width:100%" class='pl-5'>
+                </div>
+                <div class='col-sm mt-5 pl-5'>
+                    <div class='row justify-content-center'>
+                        <div class='col-sm-12'>
+                            <h3>Get Started</h3>
+                        </div>
+                        <div class='col-sm-12'>
+                            <button type="button" class="btn btn-primary"
+                                v-on:click.prevent="tologinpage">Login</button>
+                            <button type="button" class="btn btn-danger"
+                                v-on:click.prevent="toregisterpage">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loginPage" v-show="loginpage">
+            <div class='row justify-content-center pt-4'>
+                <img style="height: 180px"
+                    src='https://dewey.tailorbrands.com/production/brand_version_mockup_image/491/1972573491_31b262ed-3d5e-49c2-bd92-228049305f12.png?cb=1557396841'>
+            </div>
+            <div>
+                <div class='row justify-content-center'>
+                    <div class='row justify-content-center'>
+                        <h3 class='mt-3'>Sign In Here</h3>
+
+                        <div class="form-group mt-5 col-sm-12">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                placeholder="Password" v-model="password">
+                        </div>
+                        <button type="button" class="btn btn-primary" v-on:click.prevent="login">Login</button>
+                        <button type="button" class="btn btn-danger" v-on:click.prevent="toregisterpage">Don't have any
+                            account</button>
+                    </div>
+               
+                </div>
+
+            </div>
+        </div>
+        <div id="signup page" v-show="registerpage">
+            <div class='row justify-content-center pt-4'>
+                <img style="height: 180px"
+                    src='https://dewey.tailorbrands.com/production/brand_version_mockup_image/491/1972573491_31b262ed-3d5e-49c2-bd92-228049305f12.png?cb=1557396841'>
+            </div>
+            <div>
+                <div class='row justify-content-center'>
+                    <div class='row justify-content-center'>
+                        <h3 class='mt-3'>Register First </h3>
+
+                        <div class="form-group mt-5 col-sm-12">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                placeholder="Password" v-model="password">
+                        </div>
+                   
+                        <button type="button" class="btn btn-primary" v-on:click.prevent="tologinpage">Already have an
+                            account</button>
+                        <button type="button" class="btn btn-danger" v-on:click.prevent="register">Register</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div v-show='islogin'>
+            <button type="button" class="btn btn-danger" v-on:click.prevent="logout">Logout</button>
+        </div>
+    </div>
+    
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="vue.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script> -->
+
+
+</body>
+
+</html>
