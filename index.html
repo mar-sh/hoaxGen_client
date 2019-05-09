@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <link rel="stylesheet" href="./css/tweeter.css">
   <title>Document</title>
   <style>
     .avatar {
@@ -14,107 +16,135 @@
       border-radius: 50%;
     }
   </style>
+
 </head>
 <body>
 
-    <div class="row">
-      <div class="col-8 d-flex justify-content-center">
-          <form>
-            <div class="form-group">
-              <label for="image-source">Profile picture:</label>
-              <input type="file" class="form-control-file" id="image-source" onchange="previewImage()">
-              <small class="form-text text-muted">PNG and JPG images accepted</small>
-            </div>
-
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" class="form-control" placeholder="">
-            </div>
-
-            <div class="form-group">
-              <label for="username">Username (Twitter handle):</label>
-              <input type="text" class="form-control" id="username" placeholder="">
-              <small class="form-text text-muted">Can only be letters, numbers, and underscores.</small>
-            </div>
-
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="verifyuser">
-                <label class="custom-control-label" for="verifyuser">Verified user</label>
-              </div>  
-
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="following">
-              <label class="custom-control-label" for="following">Following</label>
-            </div>
-
-            <br>
-
-            <div class="form-group green-border-focus">
-              <label for="exampleFormControlTextarea5">Tweet content:</label>
-              <textarea class="form-control" id="exampleFormControlTextarea5" placeholder="Your Tweet here!" rows="3"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="time">Time:</label>
-              <input type="time" class="form-control" placeholder="" value="12:00">
-            </div>
-
-            <div class="form-group">
-              <label for="time">Date:</label>
-              <input type="date" class="form-control" placeholder="" >
-            </div>
-
-            <div class="form-group">
-              <label for="name">Replies:</label>
-              <input type="text" class="form-control" >
-              <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
-            </div>
-  
-            <div class="form-group">
-              <label for="name">Retweets:</label>
-              <input type="text" class="form-control" >
-              <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
-            </div>
+    <div class="row" id="app">
+      <!-- kiri -->
+      <!-- <div id="left-side" > -->
+          <div id="left-side" class="col-4 d-flex justify-content-center">
+              <form>
+                <div class="form-group">
+                  <label for="image-source">Profile picture:</label>
+                  <input type="file" class="form-control-file" id="image-source" onchange="previewImage()">
+                  <small class="form-text text-muted">PNG and JPG images accepted</small>
+                </div>
     
-            <div class="form-group">
-              <label for="name">Likes:</label>
-              <input type="text" class="form-control" >
-              <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input v-model="name" type="text" class="form-control" placeholder="">
+                </div>
+    
+                <div class="form-group">
+                  <label for="username">Username (Twitter handle):</label>
+                  <input v-model="user_name" type="text" class="form-control" id="username" placeholder="">
+                  <small class="form-text text-muted">Can only be letters, numbers, and underscores.</small>
+                </div>
+    
+                <div class="custom-control custom-checkbox">
+                    <input v-model="verified_user" type="checkbox" class="custom-control-input" id="verifyuser">
+                    <label class="custom-control-label" for="verifyuser">Verified user</label>
+                  </div>  
+    
+                <div class="custom-control custom-checkbox">
+                  <input v-model="following" type="checkbox" class="custom-control-input" id="following">
+                  <label class="custom-control-label" for="following">Following</label>
+                </div>
+    
+                <br>
+    
+                <div class="form-group green-border-focus">
+                  <label for="exampleFormControlTextarea5">Tweet content:</label>
+                  <textarea v-model="tweet_content" class="form-control" id="exampleFormControlTextarea5" placeholder="Your Tweet here!" rows="3"></textarea>
+                </div>
+    
+                <div class="form-group">
+                  <label for="time">Time:</label>
+                  <input v-model="time" type="time" class="form-control" placeholder="" value="12:00">
+                </div>
+    
+                <div class="form-group">
+                  <label for="time">Date:</label>
+                  <input v-model="date" type="date" class="form-control" placeholder="" >
+                </div>
+    
+                <div class="form-group">
+                  <label for="name">Replies:</label>
+                  <input v-model="replies" type="text" class="form-control" >
+                  <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                </div>
+      
+                <div class="form-group">
+                  <label for="name">Retweets:</label>
+                  <input v-model="retweet" type="text" class="form-control" >
+                  <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                </div>
+        
+                <div class="form-group">
+                  <label for="name">Likes:</label>
+                  <input v-model="likes" type="text" class="form-control" >
+                  <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                </div>
+                    
+    
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+      <!-- </div> -->
+
+
+      <!-- kanan -->
+      <div class="col-2 ">
+        <br>
+        <br>
+        <div class="mid-container">
+            <div class="card border" id="twitter">
+                <div class="row tweet-head align-items-center">
+                    <div class="col-sm-2 profile-container">
+                        <img id="image-preview" class="profile-picture center-block" src="./user-default.png">
+                    </div>
+                    <div class="col">
+                        <h5 style="margin-bottom: 0">{{ name }}</h5>
+                        @{{ user_name }}
+                    </div>
+                    <div v-if="follow" class="col follow-container">
+                        <button  class="follow-btn">follow</button>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+
+                  </div>
+                <div class="row tweet-content">
+                    <p>{{ tweet_content }}</p>
+                    <br>
+                    <div class="tweet-date">
+                        {{ time }} - {{ date }}
+                    </div>
+                </div>
+                <div class="row tweet-actions">
+                    <ul>
+                        <li><a href="#"><img src="./res/twitter-icons/twitter-reply-outline.svg" alt="" class="src"></a>{{ numConvert(replies) }}</li>
+                        <li><a href="#"><img src="./res/twitter-icons/twitter-retweet.svg" alt="" class="src"></a></li>{{ numConvert(retweet) }}
+                        <li><a href="#"><img src="./res/twitter-icons/twitter-like-outline.svg" alt="" class="src"></a></li>{{ numConvert(likes) }}
+                        <li><a href="#"><img src="./res/twitter-icons/twitter-message.svg" alt="" class="src"></a></li>
+                    </ul>
+                </div>
             </div>
-                
-
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-
-      <div class="col-2">
-        <br>
-        <br>
+        </div>
 
         <div class="profile-header-container">   
           <div class="profile-header-img">
-            <img id="image-preview" alt="image preview" class="avatar" src="user-default.png" />
-            <!-- badge -->
               <div class="rank-label-container">
                   <span class="label label-default rank-label"></span>
               </div>
           </div>
         </div> 
+
   
 
       </div>
     </div>
-    <script>
-    function previewImage() {
-    document.getElementById("image-preview").style.display = "block";
-    var oFReader = new FileReader();
-     oFReader.readAsDataURL(document.getElementById("image-source").files[0]);
- 
-    oFReader.onload = function(oFREvent) {
-      document.getElementById("image-preview").src = oFREvent.target.result;
-    };
-  };
-    </script>
-    
+    <script src="./js/profile.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
