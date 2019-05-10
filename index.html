@@ -222,16 +222,6 @@
                   <small class="form-text text-muted">Can only be letters, numbers, and underscores.</small>
                 </div>
     
-                <div class="custom-control custom-checkbox">
-                    <input v-model="verified_user" type="checkbox" class="custom-control-input" id="verifyuser">
-                    <label class="custom-control-label" for="verifyuser">Verified user</label>
-                  </div>  
-    
-                <div class="custom-control custom-checkbox">
-                  <input v-model="following" type="checkbox" class="custom-control-input" id="following">
-                  <label class="custom-control-label" for="following">Following</label>
-                </div>
-    
                 <br>
     
                 <div class="form-group green-border-focus">
@@ -264,7 +254,7 @@
                 <div class="form-group">
                   <label for="name">Likes:</label>
                   <input v-model="likes" type="text" class="form-control" >
-                  <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                  <small  class="form-text text-muted errorMsg">Maximum 9,999,999,999. Numbers only.</small>
                 </div>
                     
     
@@ -288,8 +278,14 @@
                         <h5 style="margin-bottom: 0">{{ name }}</h5>
                         @{{ user_name }}
                     </div>
-                    <div v-if="follow" class="col follow-container">
-                        <button  class="follow-btn">follow</button>
+                    <div class="col follow-container">
+
+                      <component :is='componentName' @change="change"></component>
+                          
+
+                        <div>
+                          
+                        </div>
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
 
@@ -345,6 +341,7 @@
 
 
     <script src="./js/profile.js"></script>
+    <script src="./js/following.js"></script>
     <script src="./js/main.js"></script>
 </body>
 

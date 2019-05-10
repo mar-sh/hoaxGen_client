@@ -114,3 +114,11 @@
   /* width: 200px; */
   overflow-y: scroll;
 }
+
+.following{
+    background: #1DA1F2;
+    color: white;
+}
+.errorMsg{
+    color:red!important;
+}
