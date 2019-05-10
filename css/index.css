@@ -1,0 +1,13 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("https://ak5.picdn.net/shutterstock/videos/14396245/thumb/4.jpg");
+    background-size: 100%;
+}
+
+#fakeImg{
+    border-radius: 50px;
+}
