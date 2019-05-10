@@ -12,28 +12,97 @@ Vue.component("twitter-layout",{
     },
     methods: {
         saveAsPNG: function(){
-            html2canvas(document.querySelector("#twitter"))
-            .then(canvas => {
-            var myImage = canvas.toDataURL();
-            canvas.toBlob(function(blob) {
-                var newImg = document.createElement('img'),
-                    url = URL.createObjectURL(blob);
-                newImg.onload = function() {
-                  // no longer need to read the blob so it's revoked
-                  URL.revokeObjectURL(url);
-                };
-                Canvas2Image.saveAsPNG(canvas)
-                Swal.fire({
-                    title: 'Sweet!',
-                    text: 'Modal with a custom image.',
-                    imageUrl: url,
-                    imageWidth: 400,
-                    imageHeight: 200,
-                    imageAlt: 'Custom image',
-                    animation: false
-                })
-            })
-        })
+            let tweet = document.querySelector("#twitter")
+            this.sendConvertedHtml(tweet)
+            // html2canvas(tweet)
+            // .then(canvas => {
+            // var myImage = canvas.toDataURL();
+            // canvas.toBlob(function(blob) {
+            //     var newImg = document.createElement('img'),
+            //         url = URL.createObjectURL(blob);
+            //     newImg.onload = function() {
+            //       // no longer need to read the blob so it's revoked
+            //       URL.revokeObjectURL(url);
+            //     };
+            //     Canvas2Image.saveAsPNG(canvas)
+                
+            // })
+            // })
+        },
+        sendConvertedHtml(tweet) {
+            // let tweet = document.querySelector("#twitter")
+            html2canvas(tweet)
+              .then((canvas) => {
+          
+                const dataUri = canvas.toDataURL();
+          
+                return new Promise((resolve) => {
+                  this.dataURLtoBlob(dataUri, (blob) => {
+                    resolve(blob);
+                  });
+                }); 
+              })
+              .then((blob) => {
+                const data = new FormData();
+                
+                data.append('file', blob);
+                return axios({
+                  method: 'POST',
+                  url: 'http://localhost:3000/hoaxes',
+                  data,
+                  headers: {
+                    token: localStorage.getItem("token"),
+                  }
+                });
+              })
+              .then(({ data }) => {
+                    this.imageUrl = data.hoax.url
+                    // Swal.fire({
+                    //     title: '<strong>HTML <u>example</u></strong>',
+                    //     type: 'info',
+                    //     html:
+                    //     `<div class="fb-share-button" 
+                    //     data-href="https://www.your-domain.com/your-page.html" 
+                    //     data-layout="button_count">`,
+                    //     showCloseButton: true,
+                    //     showCancelButton: true,
+                    //     focusConfirm: false,
+                    //     confirmButtonText:
+                    //       '<i class="fa fa-thumbs-up"></i> Great!',
+                    //     confirmButtonAriaLabel: 'Thumbs up, great!',
+                    //     cancelButtonText:
+                    //       '<i class="fa fa-thumbs-down"></i>',
+                    //     cancelButtonAriaLabel: 'Thumbs down',
+                    //   })
+                    Swal.fire({
+                        title: 'Share your Hoax!',
+                        text: "share",
+                        type: null,
+                        imageUrl: this.imageUrl,
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        imageAlt: 'Custom image',
+                        html: 
+                            ` <a id="facebook-share" href="https://www.facebook.com/sharer/sharer.php?u=${this.imageUrl}" target="_blank" style="background-color: #3b5998; color: white; margin: 5px; padding: 10px 20px; border-radius: 5px;" >Facebook</a>
+                            <a id="twitter-share" class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Tweet+ini+nyata&amp;url=${this.imageUrl}" target="_blank" style="background-color: #1da1f2; color: white; margin: 5px; padding: 10px 20px; border-radius: 5px;"></i>Twitter</a>`,
+                        animation: false,
+                    })
+                // console.log(time);
+              })
+              .catch((error) => {
+                console.log(error);
+              });   
+        },
+        dataURLtoBlob( dataUrl, callback ) {
+            const req = new XMLHttpRequest;
+        
+            req.open( 'GET', dataUrl );
+            req.responseType = 'arraybuffer'; 
+            req.onload = function fileLoaded(event) {
+                const mime = this.getResponseHeader('content-type');
+            callback( new Blob([this.response], { type:mime }));
+            };
+            req.send();  
         },
         change(newComponent){
             console.log(newComponent)
@@ -103,7 +172,7 @@ Vue.component("twitter-layout",{
                 </div>
                 
                 <div class="col" style="text-align: center">
-                <input  type="button" class="btn btn-success" value="Save PNG" @click="saveAsPNG"/>
+                <input id="generate-hoax" type="button" class="btn btn-success" value="Generate Hoax" @click="saveAsPNG"/>
                 <div id="img-out">
                     
                 </div>

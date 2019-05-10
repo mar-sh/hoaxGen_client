@@ -14,6 +14,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/twitter.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>Document</title>
     <!-- <link rel="stylesheet" href="css/imagehover.min.css"> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
@@ -21,8 +22,38 @@
 
   </head>
 
-<body style='height:100%'>
+<body style='height:100vh'>
     <div id='app'>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#"><img src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/491/1972573491_31b262ed-3d5e-49c2-bd92-228049305f12.png?cb=1557396841" height="60px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <div class="row">
+                    <a class="nav-item nav-link active" href="#">New <span class="sr-only">(current)</span></a>
+                
+                    <a class="nav-item nav-link" href="#">Manage Hoax</a>
+                
+                    <div v-show='islogin' class="col" style="width: 100%">
+                        <button type="button" class="btn btn-danger" v-on:click.prevent="logout">Logout</button>
+                        <div class="container">
+                            <div class='row'>
+                                <div class='col-sm-4' v-for='hoax in hoaxes'>
+                                    <hoaxcard :hoax="hoax"></hoaxcard>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <!-- logout page -->
+            </div>
+            </div>
+        </nav>
+        <!-- NAVBAR END -->
+
         <!-- landing page -->
         <div id='landingpage' style='height: 100%;' v-show='landingpage'>
             <div class='row justify-content-center pt-4'>
@@ -118,19 +149,6 @@
         </div>
         <!-- signup page end-->
 
-
-        <!-- logout page -->
-        <div v-show='islogin'>
-            <button type="button" class="btn btn-danger" v-on:click.prevent="logout">Logout</button>
-            <div class="container">
-                <div class='row'>
-                    <div class='col-sm-4' v-for='hoax in hoaxes'>
-                           <hoaxcard :hoax="hoax"></hoaxcard>
-                    </div>
-                </div>
-
-            </div> 
-        </div>
         <!-- logout page end-->
 
           <!-- form input start -->
@@ -197,7 +215,7 @@
           <!-- left end -->
 
           <!-- right start -->
-            <div class=" col-8 d-flex justify-content-center">
+            <div class=" col-8 d-flex justify-content-center align-items-center">
 
 
             <twitter-layout v-bind:tweetobj="tweetObj">
@@ -214,9 +232,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
     <script src="./js/html2canvas.js"></script>
+    <script src="./js/facebook-share.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <!-- <script src="./js/app.js"></script> -->
     
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./js/components/hoaxcard.js"></script>
