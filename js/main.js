@@ -1,6 +1,7 @@
 const app = new Vue({
     el:'#app',
     data:{
+<<<<<<< HEAD
         email:'',
         password:'',
         registerpage:false,
@@ -9,6 +10,8 @@ const app = new Vue({
         islogin:false,
         hoaxes:[],
         page_input:false,
+=======
+>>>>>>> 7940dd53a0c9dfff1e640d28ee8a57e6dd8be5d2
         name:'',
         user_name:'',
         tweet_content:'',
@@ -28,6 +31,7 @@ const app = new Vue({
         }
     },
     methods: {
+<<<<<<< HEAD
 
         tologinpage:function(){
             this.registerpage = false,
@@ -112,6 +116,8 @@ const app = new Vue({
                 this.islogin = true
             }
         },
+=======
+>>>>>>> 7940dd53a0c9dfff1e640d28ee8a57e6dd8be5d2
         checkLikes(value){
             if(value > 1e9){
                 
@@ -138,6 +144,7 @@ const app = new Vue({
             }
         }
     },
+<<<<<<< HEAD
     created(){
         if(localStorage.getItem('token')){
             this.registerpage = false
@@ -154,4 +161,6 @@ const app = new Vue({
         .catch(()=>{
         })
     }
+=======
+>>>>>>> 7940dd53a0c9dfff1e640d28ee8a57e6dd8be5d2
 })
