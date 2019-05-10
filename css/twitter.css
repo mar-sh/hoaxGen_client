@@ -20,16 +20,16 @@
     page-break-after: always;
 }
 
-#btnSave{
+/* #btnSave{
     margin-top: 20px; 
-    width: 600px; 
+    width: 20px; 
     padding: 20px; 
     border-radius: 15px
 }
 
 #btnSave:hover{
     background-color: #657786;
-}
+} */
 
 #twitter{
     width: 750px;
@@ -150,4 +150,19 @@
 
 .tweet-actions ul li:first-child{
     margin-left: 15px;
+}
+
+#left-side{
+    /* background-color: lightblue; */
+  height: 700px;
+  /* width: 200px; */
+  overflow-y: scroll;
+}
+
+.following{
+    background: #1DA1F2;
+    color: white;
+}
+.errorMsg{
+    color:red!important;
 }

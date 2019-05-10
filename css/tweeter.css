@@ -108,17 +108,3 @@
 .tweet-actions ul li:first-child{
     margin-left: 15px;
 }
-#left-side{
-    /* background-color: lightblue; */
-  height: 700px;
-  /* width: 200px; */
-  overflow-y: scroll;
-}
-
-.following{
-    background: #1DA1F2;
-    color: white;
-}
-.errorMsg{
-    color:red!important;
-}

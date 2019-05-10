@@ -1,16 +1,14 @@
 Vue.component("twitter-layout",{
     data(){
         return {
-            name: "",
-            account: "",
-            body: "",
-            hour: "",
-            minute: "",
-            ampm: "",
-            day: "",
-            month: "",
-            year: ""
+            componentName: ""
         }
+    },
+    props: [
+        'tweetobj'
+    ],
+    created(){
+        console.log(this.tweetobj)
     },
     methods: {
         saveAsPNG: function(){
@@ -36,87 +34,83 @@ Vue.component("twitter-layout",{
                 })
             })
         })
+        },
+        change(newComponent){
+            console.log(newComponent)
+            this.componentName = newComponent 
+        },
+        numconvert(input){
+            let result = 0
+            if (input > 1e9){
+                result = Math.floor(input / 1e9)
+                return `${result}B`
+            }else
+            if (input > 1e6){
+                result = Math.floor(input / 1e6)
+                return `${result}M`
+            }else
+            if(input > 1000){
+                result = Math.floor(input / 1000)
+                return `${result}K`    
+            }else{
+                return input
+            }
         }
     },
     template: 
     `<div>
+        <h1>{{tweetobj.name}}</h1>
         <div class="container d-flex justify-content-center" style="flex-direction: row">
-            <div class="row">
-                <div class="card shadow" id="twitter">
-                    <div class="row tweet-head align-items-center">
-                        <div class="col-sm-2 profile-container">
-                            <img class="profile-picture center-block" src="./res/default_profile.png">
-                        </div>
-                        <div class="col">
-                            <h5 style="margin-bottom: 0">{{name}}</h5>
-                            @{{account}}
-                        </div>
-                        <div class="col follow-container">
-                            <button class="follow-btn">follow</button>
+            <div class="col-11">
+                <div class="row">
+                    <div class="card shadow" id="twitter">
+                        <div class="row tweet-head align-items-center">
+                            <div class="col-sm-2 profile-container">
+                                <img id="image-preview" class="profile-picture center-block" src="./res/default_profile.png">
+                            </div>
+                            <div class="col">
+                                <h5 style="margin-bottom: 0">{{ tweetobj.name }}</h5>
+                                @{{ tweetobj.user_name }}
+                            </div>
+                            <div class="col follow-container">
+                            <component :is='tweetobj.componentName' @click="change"></component>
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row tweet-content">
-                        <p>{{body}}</p>
-                        <div class="tweet-date">
-                            {{hour}}.{{minute}} {{ampm}} - {{date}} {{month}} {{year}}
+                        <div class="row tweet-content">
+                            <p>{{ tweetobj.tweet_content }}</p>
+                            <div class="tweet-date">
+                                {{ tweetobj.time }} - {{ tweetobj.date }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="row tweet-like-container border-top border-bottom align-items-center" style="margin: 0 10px 10px 10px; padding: 10px 0">
-                        <div class="tweet-like">
+                        <div class="row tweet-like-container border-top border-bottom align-items-center" style="margin: 0 10px 10px 10px; padding: 10px 0">
+                            <div class="tweet-like">
+                                <ul>
+                                    <li><span>{{ tweetobj.retweet }}</span> Retweets</li>
+                                    <li><span>{{ tweetobj.likes }}</span> Likes</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row tweet-actions">
                             <ul>
-                                <li><span>145,235</span> Retweets</li>
-                                <li><span>23,490</span> Likes</li>
+                                <li><a href="#"><img src="./res/twitter-icons/twitter-reply-outline.svg" alt="" class="src"> {{ numconvert(tweetobj.replies) }} </a></li>
+                                <li><a href="#"><img src="./res/twitter-icons/twitter-retweet.svg" alt="" class="src"> {{ numconvert(tweetobj.retweet) }} </a></li>
+                                <li><a href="#"><img src="./res/twitter-icons/twitter-like-outline.svg" alt="" class="src"> {{ numconvert(tweetobj.likes) }}</a></li>
+                                <li><a href="#"><img src="./res/twitter-icons/twitter-message.svg" alt="" class="src"></a></li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="row tweet-actions">
-                        <ul>
-                            <li><a href="#"><img src="./res/twitter-icons/twitter-reply-outline.svg" alt="" class="src"> 24K </a></li>
-                            <li><a href="#"><img src="./res/twitter-icons/twitter-retweet.svg" alt="" class="src"> 953K </a></li>
-                            <li><a href="#"><img src="./res/twitter-icons/twitter-like-outline.svg" alt="" class="src">341K</a></li>
-                            <li><a href="#"><img src="./res/twitter-icons/twitter-message.svg" alt="" class="src"></a></li>
-                        </ul>
-                    </div>
                 </div>
+                
+                <div class="col" style="text-align: center">
+                <input  type="button" class="btn btn-success" value="Save PNG" @click="saveAsPNG"/>
+                <div id="img-out">
+                    
+                </div>
+                </div>
+
             </div>
-        </div>
-        <div class="container" style="text-align: center">
-            <input type="button" id="btnSave" value="Save PNG" @click="saveAsPNG"/>
-            <div id="img-out"></div>
-        </div>
-        <div class="container">
-            <label for="name">Name</label>
-            <input type="text" v-model="name" name="name">
-
-            <label for="account">Account</label>
-            <input type="text" v-model="account" name="account">
-
-            <label for="body">body</label>
-            <input type="text" v-model="body" name="body">
-
-            <label for="hour">hour</label>
-            <input type="text" v-model="hour" name="hour">
-
-            <label for="minute">minute</label>
-            <input type="text" v-model="minute" name="minute">
-
-            <label for="ampm">ampm</label>
-            <select name="ampm" v-model="ampm">
-                <option>AM</option>
-                <option>PM</option>
-            </select>
-
-            <label for="day">day</label>
-            <input type="text" v-model="day" name="day">
-
-            <label for="month">month</label>
-            <input type="text" v-model="month" name="month">
-
-            <label for="year">year</label>
-            <input type="text" v-model="year" name="year">
-
         </div>
     </div>`
 })

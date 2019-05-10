@@ -6,19 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/twitter.css">
     <title>Document</title>
     <!-- <link rel="stylesheet" href="css/imagehover.min.css"> -->
-
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-  <link rel="stylesheet" href="./css/tweeter.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
+    <!-- <link rel="stylesheet" href="./css/tweeter.css"> -->
 
   </head>
 
 <body style='height:100%'>
     <div id='app'>
+        <!-- landing page -->
         <div id='landingpage' style='height: 100%;' v-show='landingpage'>
             <div class='row justify-content-center pt-4'>
                 <img style="height: 180px"
@@ -43,6 +48,9 @@
                 </div>
             </div>
         </div>
+        <!-- landing page end -->
+
+        <!-- login page -->
         <div id="loginPage" v-show="loginpage">
             <div class='row justify-content-center pt-4'>
                 <img style="height: 180px"
@@ -74,6 +82,9 @@
 
             </div>
         </div>
+        <!-- login page end -->
+
+        <!-- signup page -->
         <div id="signup page" v-show="registerpage">
             <div class='row justify-content-center pt-4'>
                 <img style="height: 180px"
@@ -105,6 +116,10 @@
 
             </div>
         </div>
+        <!-- signup page end-->
+
+
+        <!-- logout page -->
         <div v-show='islogin'>
             <button type="button" class="btn btn-danger" v-on:click.prevent="logout">Logout</button>
             <div class="container">
@@ -116,86 +131,98 @@
 
             </div> 
         </div>
+        <!-- logout page end-->
 
           <!-- form input start -->
-          <div class="row" v-if="page_input">
-            <!-- kiri -->
-            <!-- <div id="left-side" > -->
-                <div id="left-side" class="col-4 d-flex justify-content-center">
-                    <form>
-                      <div class="form-group">
-                        <label for="image-source">Profile picture:</label>
-                        <input type="file" class="form-control-file" id="image-source" onchange="previewImage()">
-                        <small class="form-text text-muted">PNG and JPG images accepted</small>
-                      </div>
+        <div class="row" v-if="page_input">
+          <!-- kiri start-->
+            <div id="left-side" class="col-4 d-flex justify-content-center">
+                <form>
+                  <div class="form-group">
+                    <label for="image-source">Profile picture:</label>
+                    <input type="file" class="form-control-file" id="image-source" onchange="previewImage()">
+                    <small class="form-text text-muted">PNG and JPG images accepted</small>
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input v-model="tweetObj.name" type="text" class="form-control" placeholder="">
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="username">Username (Twitter handle):</label>
+                    <input v-model="tweetObj.user_name" type="text" class="form-control" id="username" placeholder="">
+                    <small class="form-text text-muted">Can only be letters, numbers, and underscores.</small>
+                  </div>
+      
+                  <br>
+      
+                  <div class="form-group green-border-focus">
+                    <label for="exampleFormControlTextarea5">Tweet content:</label>
+                    <textarea v-model="tweetObj.tweet_content" class="form-control" id="exampleFormControlTextarea5" placeholder="Your Tweet here!" rows="3"></textarea>
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input v-model="tweetObj.time" type="time" class="form-control" placeholder="" value="12:00">
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="time">Date:</label>
+                    <input v-model="tweetObj.date" type="date" class="form-control" placeholder="" >
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="name">Replies:</label>
+                    <input v-model="tweetObj.replies" type="text" class="form-control" >
+                    <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                  </div>
+        
+                  <div class="form-group">
+                    <label for="name">Retweets:</label>
+                    <input v-model="tweetObj.retweet" type="text" class="form-control" >
+                    <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                  </div>
           
-                      <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input v-model="name" type="text" class="form-control" placeholder="">
-                      </div>
-          
-                      <div class="form-group">
-                        <label for="username">Username (Twitter handle):</label>
-                        <input v-model="user_name" type="text" class="form-control" id="username" placeholder="">
-                        <small class="form-text text-muted">Can only be letters, numbers, and underscores.</small>
-                      </div>
-          
-                      <br>
-          
-                      <div class="form-group green-border-focus">
-                        <label for="exampleFormControlTextarea5">Tweet content:</label>
-                        <textarea v-model="tweet_content" class="form-control" id="exampleFormControlTextarea5" placeholder="Your Tweet here!" rows="3"></textarea>
-                      </div>
-          
-                      <div class="form-group">
-                        <label for="time">Time:</label>
-                        <input v-model="time" type="time" class="form-control" placeholder="" value="12:00">
-                      </div>
-          
-                      <div class="form-group">
-                        <label for="time">Date:</label>
-                        <input v-model="date" type="date" class="form-control" placeholder="" >
-                      </div>
-          
-                      <div class="form-group">
-                        <label for="name">Replies:</label>
-                        <input v-model="replies" type="text" class="form-control" >
-                        <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
-                      </div>
-            
-                      <div class="form-group">
-                        <label for="name">Retweets:</label>
-                        <input v-model="retweet" type="text" class="form-control" >
-                        <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
-                      </div>
-              
-                      <div class="form-group">
-                        <label for="name">Likes:</label>
-                        <input v-model="likes" type="text" class="form-control" >
-                        <small  class="form-text text-muted errorMsg">Maximum 9,999,999,999. Numbers only.</small>
-                      </div>
-                          
-          
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-            <!-- </div> -->
+                  <div class="form-group">
+                    <label for="name">Likes:</label>
+                    <input v-model="tweetObj.likes" type="text" class="form-control" >
+                    <small  class="form-text text-muted errorMsg">Maximum 9,999,999,999. Numbers only.</small>
+                  </div>
+                      
+      
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          <!-- left end -->
+
+          <!-- right start -->
+            <div class="">
 
 
-            <!-- kanan -->
-              <!-- form input end -->
-          </div> 
+            <twitter-layout v-bind:tweetobj="tweetObj">
+
+            </twitter-layout>
+
+
+            </div>
+            <!-- right end -->
+        </div> 
           <!-- form input end -->
-  
     </div>
-    
+    <!-- app end -->
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
+    <script src="./js/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./hoaxcard.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!-- <script src="./js/app.js"></script> -->
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/components/hoaxcard.js"></script>
     <script src="./js/profile.js"></script>
-    <script src="./js/following.js"></script>
+    <script src="./js/components/tweetLayout.js"></script>
+    <script src="./js/components/following.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

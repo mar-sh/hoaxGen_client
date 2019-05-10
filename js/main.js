@@ -1,7 +1,6 @@
 const app = new Vue({
     el:'#app',
     data:{
-<<<<<<< HEAD
         email:'',
         password:'',
         registerpage:false,
@@ -10,20 +9,20 @@ const app = new Vue({
         islogin:false,
         hoaxes:[],
         page_input:false,
-=======
->>>>>>> 7940dd53a0c9dfff1e640d28ee8a57e6dd8be5d2
-        name:'',
-        user_name:'',
-        tweet_content:'',
-        verified_user:'',
-        following:'',
-        time:'',
-        status_follow:false,
-        date:new Date().toDateString(),
-        replies:'',
-        retweet:'',
-        likes:'',
-        componentName:'statusunfollow'
+        tweetObj: {
+            name:'dion',
+            user_name:'@dionmichael',
+            tweet_content:'lorem ipsum',
+            verified_user:'',
+            following:'123352',
+            time:'11.32',
+            status_follow:false,
+            date:new Date().toDateString(),
+            replies:'4',
+            retweet:'45632',
+            likes:'78456',
+            componentName:'statusunfollow'
+        }
     },
     watch: {
         likes(value){
@@ -31,7 +30,6 @@ const app = new Vue({
         }
     },
     methods: {
-<<<<<<< HEAD
 
         tologinpage:function(){
             this.registerpage = false,
@@ -114,44 +112,25 @@ const app = new Vue({
                 this.loginpage = false
                 this.landingpage = false
                 this.islogin = true
+                this.page_input = true
+
             }
         },
-=======
->>>>>>> 7940dd53a0c9dfff1e640d28ee8a57e6dd8be5d2
         checkLikes(value){
             if(value > 1e9){
                 
             }
         },
-        change(newComponent){
-            this.componentName = newComponent 
-        },
-        numConvert(input){
-            let result = 0
-            if (input > 1e9){
-                result = Math.floor(input / 1e9)
-                return `${result}B`
-            }else
-            if (input > 1e6){
-                result = Math.floor(input / 1e6)
-                return `${result}M`
-            }else
-            if(input > 1000){
-                result = Math.floor(input / 1000)
-                return `${result}K`    
-            }else{
-                return input
-            }
-        }
+
     },
-<<<<<<< HEAD
     created(){
-        if(localStorage.getItem('token')){
-            this.registerpage = false
-            this.loginpage = false
-            this.landingpage = false
-            this.islogin = true
-        }
+        this.showhide()
+        // if(localStorage.getItem('token')){
+        //     this.registerpage = false
+        //     this.loginpage = false
+        //     this.landingpage = false
+        //     this.islogin = true
+        // }
         axios({
             method:'',
             url:''
@@ -161,6 +140,4 @@ const app = new Vue({
         .catch(()=>{
         })
     }
-=======
->>>>>>> 7940dd53a0c9dfff1e640d28ee8a57e6dd8be5d2
 })
