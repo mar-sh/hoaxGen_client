@@ -1,0 +1,124 @@
+.widget {
+    display: inline-block;
+    background-color: white;
+    font-size: 14px !important;
+    line-height: 20px !important;
+
+    margin: 5px;
+    vertical-align: top;
+    color: #333;
+
+    border-radius: 5px;
+    margin: 10px;
+    padding-bottom: 20px;
+    border: 1px solid lightgray;
+
+
+    border-radius:5px;
+    -webkit-border-radius: 5px;
+
+
+    display: inline-block;
+    page-break-after: always;
+
+}
+
+.mid-container{
+    /* top: 50%;
+    left: 50%;
+    transform: translateX(50%) translateY(50%) */
+}
+
+#twitter{
+    width: 750px;
+    padding: 40px;
+}
+
+.profile-picture{
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px 37.5px 37.5px 37.5px;
+    display: block;
+    margin: 0 auto;
+    -webkit-border-radius: 37.5px; 
+    -moz-border-radius: 37.5px;
+}
+
+.profile-container{
+    padding: 0;
+}
+
+.tweet-head{
+    height: 75px;
+}
+
+.tweet-head col h5{
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.user-container{
+    margin-bottom: 0;
+    padding-block-start: 0;
+    line-height: 5px;
+}
+
+.follow-btn{
+    border-radius: 20px;
+    background-color: white;
+    color:#78a9f2;
+    border-color: #78a9f2;
+    padding: 5px 25px;
+    font-weight: bold;
+}
+
+.follow-container{
+    text-align: right;
+    color: #78a9f2
+}
+
+.follow-container button{
+    margin-right: 5px;
+}
+
+.tweet-date{
+    font-size: 11pt;
+    color: grey;
+    font-weight: 200;
+}
+
+.tweet-content{
+    margin: 20px auto;
+}
+
+.tweet-content p{
+    font-size: 1.5rem;
+}
+
+.tweet-actions ul{
+    list-style: none;
+    padding: 0;
+}
+
+.tweet-actions ul li{
+    display: inline;
+    margin-right: 75px;
+}
+
+.tweet-actions ul li:first-child{
+    margin-left: 15px;
+}
+#left-side{
+    /* background-color: lightblue; */
+  height: 700px;
+  /* width: 200px; */
+  overflow-y: scroll;
+}
+
+.following{
+    background: #1DA1F2;
+    color: white;
+}
+.errorMsg{
+    color:red!important;
+}
