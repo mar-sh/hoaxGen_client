@@ -1,5 +1,5 @@
 Vue.component('hoaxlist', {
-    props: ["hoax"],
+    props: ["hoax", "index"],
     methods:{
         showCard:function(){
             this.$emit('showcard', this.hoax.url)
@@ -11,10 +11,7 @@ Vue.component('hoaxlist', {
             <div class="card-body py-1">
                 <div class="row "  v-on:click="showCard">
                     <div class="col-sm-8">
-                    <h5>DONALD TRUMP</h5>
-                    </div>    
-                    <div class="col-sm-4 text-muted">
-                    May 10, 2019
+                    <h5>Real Tweet {{index}}</h5>
                     </div>    
                     <div class="col-sm-6">
                     <p class = 'text-truncate'>{{hoax.url}}</p>

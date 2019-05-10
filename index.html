@@ -149,8 +149,8 @@
                         <img :src='currentCard'>
                     </div>
                     <div class='row justify-content-center' style='height:600px; overflow-y:scroll'>
-                        <div class='col-sm-9' v-for='hoax in hoaxes'>
-                                <hoaxlist @showcard="tes" :hoax="hoax"></hoaxlist>
+                        <div class='col-sm-9' v-for='(hoax, index) in hoaxes'>
+                                <hoaxlist @showcard="tes" :hoax="hoax" :index="index+1"></hoaxlist>
                         </div>
                     </div>
 
