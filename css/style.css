@@ -1,0 +1,15 @@
+#landingPage{
+    background-image: url(https://assets.teenvogue.com/photos/5c5cae9c0682b81364ddcf09/16:9/w_1280,c_limit/FB.jpg);
+    background-repeat: no-repeat;
+    height:100vh;
+}
+
+.list:hover{
+    background-color:rgb(238, 236, 236)
+}
+.list:active{
+    background-color:white
+}
+.nav-link{
+    color:black
+}
