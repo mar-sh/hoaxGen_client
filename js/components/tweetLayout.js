@@ -1,18 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/twitter.css">
-    <title>Hoax Generator</title>
-</head>
-<body>
-    <div id="app">
+Vue.component("twitter-layout",{
+    data(){
+        return {
+            name: "",
+            account: "",
+            body: "",
+            hour: "",
+            minute: "",
+            ampm: "",
+            day: "",
+            month: "",
+            year: ""
+        }
+    },
+    methods: {
+        saveAsPNG: function(){
+            html2canvas(document.querySelector("#twitter"))
+            .then(canvas => {
+            var myImage = canvas.toDataURL();
+            canvas.toBlob(function(blob) {
+                var newImg = document.createElement('img'),
+                    url = URL.createObjectURL(blob);
+                newImg.onload = function() {
+                  // no longer need to read the blob so it's revoked
+                  URL.revokeObjectURL(url);
+                };
+                Canvas2Image.saveAsPNG(canvas)
+                Swal.fire({
+                    title: 'Sweet!',
+                    text: 'Modal with a custom image.',
+                    imageUrl: url,
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    animation: false
+                })
+            })
+        })
+        }
+    },
+    template: 
+    `<div>
         <div class="container d-flex justify-content-center" style="flex-direction: row">
             <div class="row">
                 <div class="card shadow" id="twitter">
@@ -32,7 +59,7 @@
                     <div class="row tweet-content">
                         <p>{{body}}</p>
                         <div class="tweet-date">
-                            {{hour}}.{{minute}} {{ampm}} - 1 Dec 1992
+                            {{hour}}.{{minute}} {{ampm}} - {{date}} {{month}} {{year}}
                         </div>
                     </div>
                     <div class="row tweet-like-container border-top border-bottom align-items-center" style="margin: 0 10px 10px 10px; padding: 10px 0">
@@ -56,7 +83,7 @@
             </div>
         </div>
         <div class="container" style="text-align: center">
-            <input type="button" id="btnSave" value="Save PNG"/>
+            <input type="button" id="btnSave" value="Save PNG" @click="saveAsPNG"/>
             <div id="img-out"></div>
         </div>
         <div class="container">
@@ -91,14 +118,5 @@
             <input type="text" v-model="year" name="year">
 
         </div>
-    </div>
-
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
-    <script src="./js/html2canvas.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="js/app.js"></script>
-    <script src="./js/index.js"></script>
-</body>
-</html>
+    </div>`
+})
