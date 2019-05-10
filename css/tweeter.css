@@ -122,3 +122,10 @@
 .errorMsg{
     color:red!important;
 }
+
+.list:hover{
+    background-color:rgb(238, 236, 236)
+}
+.list:active{
+    background-color:white
+}
