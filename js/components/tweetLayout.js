@@ -1,7 +1,8 @@
 Vue.component("twitter-layout",{
     data(){
         return {
-            componentName: ""
+            page_following:true,
+            page_unfollow:false,
         }
     },
     props: [
@@ -34,6 +35,10 @@ Vue.component("twitter-layout",{
                 })
             })
         })
+        },
+        dateFormat(value){
+            let newDate = new Date(value).toDateString()
+            return newDate
         },
         change(newComponent){
             console.log(newComponent)
@@ -72,14 +77,23 @@ Vue.component("twitter-layout",{
                                 @{{ tweetobj.user_name }}
                             </div>
                             <div class="col follow-container">
-                            <component :is='tweetobj.componentName' @click="change"></component>
+                            <button 
+                                v-if="page_following"
+                                @click.prevent="page_unfollow=true, page_following=false"
+                                class="follow-btn">follow
+                            </button>
+                            <button 
+                                v-if="page_unfollow"
+                                @click="page_following=true, page_unfollow=false"
+                                class="follow-btn following">following
+                            </button>
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="row tweet-content">
                             <p>{{ tweetobj.tweet_content }}</p>
                             <div class="tweet-date">
-                                {{ tweetobj.time }} - {{ tweetobj.date }}
+                                {{ tweetobj.time }} - {{ dateFormat(tweetobj.date) }}
                             </div>
                         </div>
                         <div class="row tweet-like-container border-top border-bottom align-items-center" style="margin: 0 10px 10px 10px; padding: 10px 0">

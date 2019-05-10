@@ -208,20 +208,20 @@
 
                                 <div class="form-group">
                                     <label for="name">Replies:</label>
-                                    <input v-model="tweetObj.replies" type="text" class="form-control">
-                                    <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                                    <input v-model="tweetObj.replies" type="number" max="10000000000" class="form-control">
+                                    <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers only.</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Retweets:</label>
-                                    <input v-model="tweetObj.retweet" type="text" class="form-control">
-                                    <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
+                                    <input v-model="tweetObj.retweet" type="number" max="10000000000" class="form-control">
+                                    <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers only.</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Likes:</label>
-                                    <input v-model="tweetObj.likes" type="text" class="form-control">
-                                    <small class="form-text text-muted errorMsg">Maximum 9,999,999,999. Numbers
+                                    <input v-model="tweetObj.likes" type="number" max="10000000000" class="form-control">
+                                    <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers
                                         only.</small>
                                 </div>
 
