@@ -125,7 +125,7 @@
         <!-- logout page -->
         <div v-show='islogin'>
             <div>
-                <ul class="nav justify-content-around" style="background-color:rgb(163, 163, 187)">
+                <ul class="nav justify-content-around" style="background-color:rgb(163, 163, 187)" >
                     <li class="nav-item">
                         <a class="nav-link active" href="#" v-on:click="changepage(2)">new</a>
                     </li>
@@ -175,15 +175,24 @@
 
                                 <div class="form-group">
                                     <label for="name">Name:</label>
-                                    <input v-model="tweetObj.name" type="text" class="form-control" placeholder="">
+                                    <input v-model="tweetObj.name" type="text" class="form-control" placeholder="Name">
                                 </div>
 
+                                <label for="username">Username (Twitter handle):</label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                     <span class="input-group-text" id="basic-addon1">@</span>
+                                  </div>
+                                  
+                                  <input v-model="tweetObj.user_name" id="username" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                  
+                                  </div>
+                                  <small class="form-text text-muted">Can only be letters, numbers, and
+                                    underscores.
+                                  </small>
+
                                 <div class="form-group">
-                                    <label for="username">Username (Twitter handle):</label>
-                                    <input v-model="tweetObj.user_name" type="text" class="form-control" id="username"
-                                        placeholder="">
-                                    <small class="form-text text-muted">Can only be letters, numbers, and
-                                        underscores.</small>
+                                    <!-- <input  type="text" class="form-control" placeholder=""> -->
                                 </div>
 
                                 <br>
@@ -224,9 +233,6 @@
                                     <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers
                                         only.</small>
                                 </div>
-
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                         <!-- left end -->
