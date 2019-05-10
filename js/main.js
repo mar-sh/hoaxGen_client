@@ -3,9 +3,6 @@ const app = new Vue({
     data:{
         email:'',
         password:'',
-        registerpage:false,
-        loginpage:false,
-        landingpage:true,
         islogin:false,
         hoaxes:[],
         page_input:false,
@@ -22,7 +19,10 @@ const app = new Vue({
             retweet:'45632',
             likes:'78456',
             componentName:'statusunfollow'
-        }
+        },
+        beforeloginpage:1,
+        page:3,
+        currentCard:''
     },
     watch: {
         likes(value){
@@ -31,15 +31,15 @@ const app = new Vue({
     },
     methods: {
 
-        tologinpage:function(){
-            this.registerpage = false,
-            this.loginpage=true,
-            this.landingpage=false
+        tes:function(payload){
+            console.log(payload)
+            this.currentCard = payload
         },
-        toregisterpage:function(){
-            this.registerpage=true,
-            this.loginpage=false,
-            this.landingpage=true
+        changepage:function(newPage){
+            this.page=newPage
+        },
+        beforelogin:function(newpage){
+            this.beforeloginpage=newpage
         },
         login:function(){
             axios({
@@ -51,8 +51,12 @@ const app = new Vue({
                 }
             })
             .then(({data})=>{
+                this.hoaxes=[]
                 localStorage.setItem('token',data.token)
                 this.showhide()
+                if(this.islogin === true){
+                    this.page = 3
+                }
                 this.getHoaxes()
                 console.log(data)
             })
@@ -91,7 +95,6 @@ const app = new Vue({
             .then(({data})=>{
                 localStorage.setItem('token',data.token)
                 this.showhide()
-
                 console.log(data)
             })
             .catch(({err})=>{
@@ -101,10 +104,7 @@ const app = new Vue({
         },
         logout:function(){
             localStorage.removeItem('token')
-            this.registerpage = false
-            this.loginpage = false
-            this.landingpage =true
-            this.islogin = false
+            this.showhide()
         },
         showhide:function(){
             if(localStorage.getItem('token')){
@@ -112,32 +112,40 @@ const app = new Vue({
                 this.loginpage = false
                 this.landingpage = false
                 this.islogin = true
-                this.page_input = true
-
+            }else{
+                this.landingpage = true
+                this.registerpage = false
+                this.loginpage = false
+                this.islogin = false
+                this.page=''
             }
         },
         checkLikes(value){
             if(value > 1e9){
-                
             }
         },
 
     },
     created(){
         this.showhide()
-        // if(localStorage.getItem('token')){
-        //     this.registerpage = false
-        //     this.loginpage = false
-        //     this.landingpage = false
-        //     this.islogin = true
-        // }
+        if(this.islogin === true){
+            this.page = 3
+        }
         axios({
-            method:'',
-            url:''
+            method:'get',
+            url:"http://localhost:3000/hoaxes",
+            headers:{
+                token:localStorage.getItem('token')
+            }
         })
-        .then(()=>{
+        .then(({data})=>{
+            console.log(data)
+            for(let i = 0 ; i < data.hoaxes.length; i++){
+                this.hoaxes.push(data.hoaxes[i])
+            }
         })
-        .catch(()=>{
+        .catch(({err})=>{
+            console.log(err)
         })
     }
 })
