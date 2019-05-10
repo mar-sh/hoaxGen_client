@@ -21,5 +21,5 @@ Vue.component('hoaxlist', {
         </div>
     </div>
     `
-
-})
+ 
+ })

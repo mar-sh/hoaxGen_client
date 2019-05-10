@@ -31,6 +31,11 @@
     background-color: #657786;
 } */
 
+#generate-hoax{
+    margin-top: 25px;
+
+}
+
 #twitter{
     width: 750px;
     padding: 40px;
@@ -154,7 +159,9 @@
 
 #left-side{
     /* background-color: lightblue; */
-  height: 700px;
+  height: 100vh;
+  background-color: #ffffff;
+  padding: 30px 20px;
   /* width: 200px; */
   overflow-y: scroll;
 }

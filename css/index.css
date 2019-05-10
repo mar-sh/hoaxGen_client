@@ -5,7 +5,10 @@ html, body{
 
 body{
     background-image: url("https://ak5.picdn.net/shutterstock/videos/14396245/thumb/4.jpg");
-    background-size: 100%;
+    background-size: 100vw 100vh;
+    height: 100vh;
+    object-fit: cover;
+    background-repeat: no-repeat;
 }
 
 #fakeImg{

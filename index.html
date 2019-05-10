@@ -14,13 +14,17 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/twitter.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>Document</title>
     <!-- <link rel="stylesheet" href="css/imagehover.min.css"> -->
 
 </head>
 
-<body style='height:100%'>
+<body style='height:100vh'>
     <div id='app'>
+
+
+        <!-- landing page -->
         <div v-show='islogin === false'>
             <div id='landingpage' style='height: 100%;' v-show='beforeloginpage === 1'>
                 <div class='row justify-content-center pt-4'>
@@ -117,14 +121,41 @@
 
                 </div>
             </div>
+
         </div>
         <!-- signup page end-->
 
 
-        <!-- logout page -->
         <div v-show='islogin'>
-            <div>
-                <ul class="nav justify-content-around" style="background-color:rgb(7, 81, 243) ;color:rgb(0, 0, 0)">
+
+            <!-- NAVBAR -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#"><img
+                        src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/491/1972573491_31b262ed-3d5e-49c2-bd92-228049305f12.png?cb=1557396841"
+                        height="60px"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <div class="row">
+                            <a class="nav-item nav-link active" href="#" v-on:click="changepage(2)">New <span class="sr-only">(current)</span></a>
+
+                            <a class="nav-item nav-link" href="#" v-on:click="changepage(3)">Manage Hoax</a>
+
+                            <div v-show='islogin' class="col" style="width: 100%">
+                                <button type="button" class="btn btn-danger" v-on:click.prevent="logout">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- NAVBAR END -->
+
+
+            <!-- <div>
+                <ul class="nav justify-content-around" style="background-color:rgb(163, 163, 187)" >
                     <li class="nav-item">
                         <a class="nav-link" href="#" v-on:click="changepage(2)">new</a>
                     </li>
@@ -141,7 +172,7 @@
                         <a class="nav-link " href="#" v-on:click.prevent="logout">Log out</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
 
             <div id='manageyourhoax' v-show='page === 3'>
                 <div class="container">
@@ -153,111 +184,116 @@
                                 <hoaxlist @showcard="tes" :hoax="hoax" :index="index+1"></hoaxlist>
                         </div>
                     </div>
-
                 </div>
             </div>
-                    <!-- logout page end-->
+            <!-- logout page end-->
 
-                    <!-- form input start -->
+            <!-- form input start -->
             <div class="row" v-show='page === 2 '>
-                        <!-- kiri start-->
-                        <div id="left-side" class="col-4 d-flex justify-content-center">
-                            <form>
-                                <div class="form-group">
-                                    <label for="image-source">Profile picture:</label>
-                                    <input type="file" class="form-control-file" id="image-source"
-                                        onchange="previewImage()">
-                                    <small class="form-text text-muted">PNG and JPG images accepted</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input v-model="tweetObj.name" type="text" class="form-control" placeholder="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="username">Username (Twitter handle):</label>
-                                    <input v-model="tweetObj.user_name" type="text" class="form-control" id="username"
-                                        placeholder="">
-                                    <small class="form-text text-muted">Can only be letters, numbers, and
-                                        underscores.</small>
-                                </div>
-
-                                <br>
-
-                                <div class="form-group green-border-focus">
-                                    <label for="exampleFormControlTextarea5">Tweet content:</label>
-                                    <textarea v-model="tweetObj.tweet_content" class="form-control"
-                                        id="exampleFormControlTextarea5" placeholder="Your Tweet here!"
-                                        rows="3"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="time">Time:</label>
-                                    <input v-model="tweetObj.time" type="time" class="form-control" placeholder=""
-                                        value="12:00">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="time">Date:</label>
-                                    <input v-model="tweetObj.date" type="date" class="form-control" placeholder="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Replies:</label>
-                                    <input v-model="tweetObj.replies" type="text" class="form-control">
-                                    <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Retweets:</label>
-                                    <input v-model="tweetObj.retweet" type="text" class="form-control">
-                                    <small class="form-text text-muted">Maximum 9,999,999,999. Numbers only.</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Likes:</label>
-                                    <input v-model="tweetObj.likes" type="text" class="form-control">
-                                    <small class="form-text text-muted errorMsg">Maximum 9,999,999,999. Numbers
-                                        only.</small>
-                                </div>
-
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                <!-- kiri start-->
+                <div id="left-side" class="col-4 d-flex justify-content-center">
+                    <form>
+                        <div class="form-group">
+                            <label for="image-source">Profile picture:</label>
+                            <input type="file" class="form-control-file" id="image-source" onchange="previewImage()">
+                            <small class="form-text text-muted">PNG and JPG images accepted</small>
                         </div>
-                        <!-- left end -->
 
-                        <!-- right start -->
-                        <div class=" col-8 d-flex justify-content-center">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input v-model="tweetObj.name" type="text" class="form-control" placeholder="Name">
+                        </div>
 
+                        <label for="username">Username (Twitter handle):</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                            </div>
 
-                            <twitter-layout v-bind:tweetobj="tweetObj">
-
-                            </twitter-layout>
-
+                            <input v-model="tweetObj.user_name" id="username" type="text" class="form-control"
+                                placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 
                         </div>
-                        <!-- right end -->
-                    <!-- form input end -->
+                        <small class="form-text text-muted">Can only be letters, numbers, and
+                            underscores.
+                        </small>
+
+                        <div class="form-group">
+                            <!-- <input  type="text" class="form-control" placeholder=""> -->
+                        </div>
+
+                        <br>
+
+                        <div class="form-group green-border-focus">
+                            <label for="exampleFormControlTextarea5">Tweet content:</label>
+                            <textarea v-model="tweetObj.tweet_content" class="form-control"
+                                id="exampleFormControlTextarea5" placeholder="Your Tweet here!" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Time:</label>
+                            <input v-model="tweetObj.time" type="time" class="form-control" placeholder=""
+                                value="12:00">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Date:</label>
+                            <input v-model="tweetObj.date" type="date" class="form-control" placeholder="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Replies:</label>
+                            <input v-model="tweetObj.replies" type="number" max="10000000000" class="form-control">
+                            <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers only.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Retweets:</label>
+                            <input v-model="tweetObj.retweet" type="number" max="10000000000" class="form-control">
+                            <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers only.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Likes:</label>
+                            <input v-model="tweetObj.likes" type="number" max="10000000000" class="form-control">
+                            <small class="form-text text-muted ">Maximum 9,999,999,999. Numbers
+                                only.</small>
+                        </div>
+                    </form>
                 </div>
+                <!-- left end -->
+
+                <!-- right start -->
+                <div class=" col-8 d-flex justify-content-center">
+
+
+                    <twitter-layout v-bind:tweetobj="tweetObj">
+
+                    </twitter-layout>
+
+
+                </div>
+                <!-- right end -->
+                <!-- form input end -->
             </div>
         </div>
-            <!-- app end -->
 
-            <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
-            <script src="./js/html2canvas.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-            <!-- <script src="./js/app.js"></script> -->
+    </div>
+    <!-- app end -->
 
-            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-            <script src="./js/components/hoaxcard.js"></script>
-            <script src="./js/components/hoaxlist.js"></script>
-            <script src="./js/profile.js"></script>
-            <script src="./js/components/tweetLayout.js"></script>
-            <script src="./js/components/following.js"></script>
-            <script src="./js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
+    <script src="./js/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!-- <script src="./js/app.js"></script> -->
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/components/hoaxcard.js"></script>
+    <script src="./js/components/hoaxlist.js"></script>
+    <script src="./js/profile.js"></script>
+    <script src="./js/components/tweetLayout.js"></script>
+    <script src="./js/components/following.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
