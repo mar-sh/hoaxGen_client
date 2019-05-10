@@ -30,7 +30,6 @@ const app = new Vue({
         }
     },
     methods: {
-
         tes:function(payload){
             console.log(payload)
             this.currentCard = payload
@@ -42,13 +41,18 @@ const app = new Vue({
             this.beforeloginpage=newpage
         },
         login:function(){
-            axios({
-                method:'post',
-                url:"http://localhost:3000/login",
-                data:{
-                    email:this.email,
-                    password:this.password
-                }
+            // axios({
+            //     method:'post',
+            //     url:"http://api-hoaxgen.demarsh.dev/login",
+            //     data:{
+            //         email:this.email,
+            //         password:this.password
+            //     }
+            // })
+            axios
+            .post('http://hoaxgen-api.marasis.xyz/login', {
+                email:this.email,
+                password:this.password
             })
             .then(({data})=>{
                 this.hoaxes=[]
@@ -60,7 +64,7 @@ const app = new Vue({
                 this.getHoaxes()
                 console.log(data)
             })
-            .catch(({err})=>{
+            .catch((err)=>{
                 console.log(err)
             })
 
@@ -68,7 +72,7 @@ const app = new Vue({
         getHoaxes:function(){
             axios({
                 method:'get',
-                url:"http://localhost:3000/hoaxes",
+                url:"http://hoaxgen.marasis.xyz/hoaxes",
                 headers:{
                     token:localStorage.getItem('token')
                 }
@@ -79,14 +83,14 @@ const app = new Vue({
                     this.hoaxes.push(data.hoaxes[i])
                 }
             })
-            .catch(({err})=>{
+            .catch((err)=>{
                 console.log(err)
             })
         },
         register:function(){
             axios({
                 method:'post',
-                url:"http://localhost:3000/register",
+                url:"http://hoaxgen.marasis.xyz/register",
                 data:{
                     email:this.email,
                     password:this.password
@@ -130,10 +134,13 @@ const app = new Vue({
         this.showhide()
         if(this.islogin === true){
             this.page = 3
+        }else{
+            this.islogin = false
+            this.beforeloginpage =1
         }
         axios({
             method:'get',
-            url:"http://localhost:3000/hoaxes",
+            url:"http://hoaxgen.marasis.xyz/hoaxes",
             headers:{
                 token:localStorage.getItem('token')
             }

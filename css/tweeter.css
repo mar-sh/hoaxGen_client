@@ -109,9 +109,3 @@
     margin-left: 15px;
 }
 
-.list:hover{
-    background-color:rgb(238, 236, 236)
-}
-.list:active{
-    background-color:white
-}

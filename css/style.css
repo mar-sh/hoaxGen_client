@@ -3,3 +3,13 @@
     background-repeat: no-repeat;
     height:100%;
 }
+
+.list:hover{
+    background-color:rgb(238, 236, 236)
+}
+.list:active{
+    background-color:white
+}
+.nav-link{
+    color:black
+}

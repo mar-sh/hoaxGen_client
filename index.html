@@ -94,7 +94,6 @@
                     <div class='row justify-content-center'>
                         <div class='row justify-content-center'>
                             <h3 class='mt-3'>Register First </h3>
-
                             <div class="form-group mt-5 col-sm-12">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" class="form-control" id="exampleInputEmail2"
@@ -125,9 +124,9 @@
         <!-- logout page -->
         <div v-show='islogin'>
             <div>
-                <ul class="nav justify-content-around" style="background-color:rgb(163, 163, 187)">
+                <ul class="nav justify-content-around" style="background-color:rgb(7, 81, 243) ;color:rgb(0, 0, 0)">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" v-on:click="changepage(2)">new</a>
+                        <a class="nav-link" href="#" v-on:click="changepage(2)">new</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" v-on:click="changepage(3)">Manage Hoax</a>
@@ -147,11 +146,9 @@
             <div id='manageyourhoax' v-show='page === 3'>
                 <div class="container">
                     <div class='row justify-content-center m-5'>
-                        {{currentCard}}
-                        <!-- <hoaxcard></hoaxcard> -->
+                        <img :src='currentCard'>
                     </div>
-
-                    <div class='row justify-content-center'>
+                    <div class='row justify-content-center' style='height:600px; overflow-y:scroll'>
                         <div class='col-sm-9' v-for='hoax in hoaxes'>
                                 <hoaxlist @showcard="tes" :hoax="hoax"></hoaxlist>
                         </div>
@@ -245,6 +242,7 @@
                     <!-- form input end -->
                 </div>
             </div>
+        </div>
             <!-- app end -->
 
             <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>

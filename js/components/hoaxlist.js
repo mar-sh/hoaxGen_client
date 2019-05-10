@@ -2,7 +2,7 @@ Vue.component('hoaxlist', {
     props: ["hoax"],
     methods:{
         showCard:function(){
-            this.$emit('showcard', 'hello')
+            this.$emit('showcard', this.hoax.url)
         }
     },
     template: `
