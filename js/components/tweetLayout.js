@@ -59,7 +59,6 @@ Vue.component("twitter-layout",{
     },
     template: 
     `<div>
-        <h1>{{tweetobj.name}}</h1>
         <div class="container d-flex justify-content-center" style="flex-direction: row">
             <div class="col-11">
                 <div class="row">
