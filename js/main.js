@@ -1,21 +1,32 @@
 const app = new Vue({
     el:'#app',
     data:{
-        name:'Name',
+        name:'',
         user_name:'',
         tweet_content:'',
         verified_user:'',
         following:'',
         time:'',
-        follow:true,
+        status_follow:false,
         date:new Date().toDateString(),
         replies:'',
         retweet:'',
-        likes:''
+        likes:'',
+        componentName:'statusunfollow'
+    },
+    watch: {
+        likes(value){
+            this.checkLikes(value)
+        }
     },
     methods: {
-        getTime(){
-            return 
+        checkLikes(value){
+            if(value > 1e9){
+                
+            }
+        },
+        change(newComponent){
+            this.componentName = newComponent 
         },
         numConvert(input){
             let result = 0
