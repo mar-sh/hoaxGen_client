@@ -1,7 +1,8 @@
 Vue.component("twitter-layout",{
     data(){
         return {
-            componentName: ""
+            page_following:true,
+            page_unfollow:false,
         }
     },
     props: [
@@ -14,23 +15,8 @@ Vue.component("twitter-layout",{
         saveAsPNG: function(){
             let tweet = document.querySelector("#twitter")
             this.sendConvertedHtml(tweet)
-            // html2canvas(tweet)
-            // .then(canvas => {
-            // var myImage = canvas.toDataURL();
-            // canvas.toBlob(function(blob) {
-            //     var newImg = document.createElement('img'),
-            //         url = URL.createObjectURL(blob);
-            //     newImg.onload = function() {
-            //       // no longer need to read the blob so it's revoked
-            //       URL.revokeObjectURL(url);
-            //     };
-            //     Canvas2Image.saveAsPNG(canvas)
-                
-            // })
-            // })
         },
         sendConvertedHtml(tweet) {
-            // let tweet = document.querySelector("#twitter")
             html2canvas(tweet)
               .then((canvas) => {
           
@@ -57,23 +43,6 @@ Vue.component("twitter-layout",{
               })
               .then(({ data }) => {
                     this.imageUrl = data.hoax.url
-                    // Swal.fire({
-                    //     title: '<strong>HTML <u>example</u></strong>',
-                    //     type: 'info',
-                    //     html:
-                    //     `<div class="fb-share-button" 
-                    //     data-href="https://www.your-domain.com/your-page.html" 
-                    //     data-layout="button_count">`,
-                    //     showCloseButton: true,
-                    //     showCancelButton: true,
-                    //     focusConfirm: false,
-                    //     confirmButtonText:
-                    //       '<i class="fa fa-thumbs-up"></i> Great!',
-                    //     confirmButtonAriaLabel: 'Thumbs up, great!',
-                    //     cancelButtonText:
-                    //       '<i class="fa fa-thumbs-down"></i>',
-                    //     cancelButtonAriaLabel: 'Thumbs down',
-                    //   })
                     Swal.fire({
                         title: 'Share your Hoax!',
                         text: "share",
@@ -103,6 +72,10 @@ Vue.component("twitter-layout",{
             callback( new Blob([this.response], { type:mime }));
             };
             req.send();  
+        },
+        dateFormat(value){
+            let newDate = new Date(value).toDateString()
+            return newDate
         },
         change(newComponent){
             console.log(newComponent)
@@ -141,14 +114,23 @@ Vue.component("twitter-layout",{
                                 @{{ tweetobj.user_name }}
                             </div>
                             <div class="col follow-container">
-                            <component :is='tweetobj.componentName' @click="change"></component>
+                            <button 
+                                v-if="page_following"
+                                @click.prevent="page_unfollow=true, page_following=false"
+                                class="follow-btn">follow
+                            </button>
+                            <button 
+                                v-if="page_unfollow"
+                                @click="page_following=true, page_unfollow=false"
+                                class="follow-btn following">following
+                            </button>
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="row tweet-content">
                             <p>{{ tweetobj.tweet_content }}</p>
                             <div class="tweet-date">
-                                {{ tweetobj.time }} - {{ tweetobj.date }}
+                                {{ tweetobj.time }} - {{ dateFormat(tweetobj.date) }}
                             </div>
                         </div>
                         <div class="row tweet-like-container border-top border-bottom align-items-center" style="margin: 0 10px 10px 10px; padding: 10px 0">
